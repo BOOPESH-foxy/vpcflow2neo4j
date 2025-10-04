@@ -4,9 +4,9 @@ from aws_client import aws_client
 
 vpc_client = aws_client()
 
-def check_vpc_existence(name='default'):
+def fetch_vpc_id(name='default'):
 
-    print(f"! checking vpc {name}")
+    print(f"! Fetching VPC id {name}")
     try:
         if(name=='default'):
             response_default_vpc = vpc_client.describe_vpcs(
@@ -19,19 +19,16 @@ def check_vpc_existence(name='default'):
             vpc_id = vpc_data["VpcId"]
             return vpc_id
         else:
-            response_vpc = vpc_client.describe_vpcs(
+            response_user_vpc = vpc_client.describe_vpcs(
                 Filters = [{
                     "Name":"tag:Name",
                     "Values":[name]
                 }]
             )
-            print(response_vpc)
-            return id
+            vpc_data = response_user_vpc["Vpcs"][0]
+            vpc_id = vpc_data["VpcId"]
+            return vpc_id
         
     except Exception as e:
         print(":: Error ::",e)
         raise
-
-
-
-check_vpc_existence()
