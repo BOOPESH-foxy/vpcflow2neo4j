@@ -2,3 +2,4 @@
 .env
 NEO4J_AUTH.txt
 scripts/.env
+scripts/__pycache__
