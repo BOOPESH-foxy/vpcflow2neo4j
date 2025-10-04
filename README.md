@@ -2,24 +2,26 @@
 
 Collect **AWS VPC Flow Logs** with **boto3** and explore relationships in **Neo4j**.
 
-> Pulls flow logs from **CloudWatch Logs** or **S3** and writes a graph you can query/visualize in Neo4j.
+> Pulls flow logs from **CloudWatch Logs** or **S3** for a user specified VPC and writes a graph you can query/visualize in Neo4j.
 
 ---
 
 ## Status
-Early initial commit. Interfaces may change.
+Boto3 setup for collecting logs - Under development. 
 
 ## Features (initial scope)
-- Sources: **CloudWatch Logs** *or* **S3 (.gz)**
+- Create **VPC Flow Logs**(destination: CloudWatch Logs and S3 - as per user requirement)
+- Download flow logs from the user specified flow log
+- Sources: **CloudWatch Logs** *and* **S3 (.gz)**
 - Neo4j graph model
 
 ---
 
 ## Requirements
 - Python **3.10+**
-- AWS account with **VPC Flow Logs** enabled (destination: CloudWatch Logs or S3)
-- Neo4j **5.x** (local Docker or Aura)
-- AWS credentials via `AWS_PROFILE`, env vars, or IAM role
+- AWS account 
+- Neo4j **5.x** (local Docker)
+- AWS credentials via `IAM role`
 
 ---
 
@@ -27,4 +29,4 @@ Early initial commit. Interfaces may change.
 
 ### 1. Setup
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/BOOPESH-foxy/vpcflow2neo4j.git
