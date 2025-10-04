@@ -3,31 +3,22 @@ import botocore
 from aws_client import aws_client
 
 vpc_client = aws_client()
+vpc_id_list = []
 
-def fetch_vpc_id(name='default'):
+def fetch_vpc_ids():
 
-    print(f"! Fetching VPC id {name}")
+    print(f"! Fetching VPC id's")
     try:
-        if(name=='default'):
-            response_default_vpc = vpc_client.describe_vpcs(
-                Filters = [{
-                    "Name":"isDefault",
-                    "Values":["true"]
-                }]
-            )
-            vpc_data = response_default_vpc["Vpcs"][0]
+
+        response_vpc = vpc_client.describe_vpcs(
+        )
+        len_of_list = len(response_vpc)
+        for _ in range(len_of_list):
+            vpc_data = response_vpc["Vpcs"][0]
             vpc_id = vpc_data["VpcId"]
-            return vpc_id
-        else:
-            response_user_vpc = vpc_client.describe_vpcs(
-                Filters = [{
-                    "Name":"tag:Name",
-                    "Values":[name]
-                }]
-            )
-            vpc_data = response_user_vpc["Vpcs"][0]
-            vpc_id = vpc_data["VpcId"]
-            return vpc_id
+            vpc_id_list.append(vpc_id)
+    
+        return vpc_id_list
         
     except Exception as e:
         print(":: Error ::",e)
