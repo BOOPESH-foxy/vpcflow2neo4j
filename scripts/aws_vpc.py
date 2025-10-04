@@ -14,10 +14,11 @@ def fetch_vpc_ids():
         )
         len_of_list = len(response_vpc)
         for _ in range(len_of_list):
-            vpc_data = response_vpc["Vpcs"][0]
+            vpc_data = response_vpc["Vpcs"][_]
             vpc_id = vpc_data["VpcId"]
             vpc_id_list.append(vpc_id)
     
+        print(vpc_id_list)
         return vpc_id_list
         
     except Exception as e:
