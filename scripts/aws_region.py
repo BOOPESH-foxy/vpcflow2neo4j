@@ -9,20 +9,14 @@ list_regions = []
 def fetch_regions():
     
     try:
-        response_region = client.describe_regions()
-        regions_data = response_region["Regions"]
-        region_count = len(regions_data)
-
-        for _ in range(region_count):
-            region_data = regions_data[_]
-            region_name = region_data['RegionName']
-            list_regions.append(region_name)    
-
-        print(list_regions)
-        return list_regions
-    
+        r = client.describe_regions(
+            AllRegions=True, 
+            Filters=[{
+                "Name":"opt-in-status",
+                "Values":["opt-in-not-required","opted-in"
+                    ]}])
+        return sorted([x["RegionName"] for x in r["Regions"]])
     
     except Exception as e:
         print(":: Error ::",e)
         raise
-    
