@@ -1,10 +1,10 @@
-import os
 import boto3
-from dotenv import load_dotenv
 
+def boto3_session():
+    return boto3.Session()
 
 def ec2_resource():
     return boto3.resource('ec2')
 
-def aws_session():
+def ec2_client():
     return boto3.client('ec2')

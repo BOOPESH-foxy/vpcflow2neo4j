@@ -14,7 +14,6 @@ def fetch_vpc_ids_typer():
 def fetch_regions_typer():
     "Fetches regions"
     fetch_regions()
-    
 
 if __name__ == "__main__":
     app()

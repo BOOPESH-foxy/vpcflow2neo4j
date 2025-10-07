@@ -1,8 +1,6 @@
-import boto3
-import botocore
-from aws_session import aws_session
+from aws_session import ec2_client
 
-client = aws_session()
+client = ec2_client()
 list_regions = []
 
 def fetch_regions():
