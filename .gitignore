@@ -6,4 +6,4 @@ scripts/config.json
 scripts/__pycache__
 scripts/collector/__pycache__
 scripts/collector/config.json
-
+Output/

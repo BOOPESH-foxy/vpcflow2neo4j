@@ -12,13 +12,13 @@ def main():
     argument_parser.add_argument("--regions", nargs="*", help="If not provided, discovers all the regions in Account")
     args = argument_parser.parse_args()
     session = boto3_session()
-    print("argument : ",args.regions)
     regions_list =  args.regions or fetch_regions()
-
+        
     with ThreadPoolExecutor(max_workers=8) as executor:
-        data_collection_progress = [executor.submit(collect_region_data,session,_,args.account) for _ in regions_list]
+        data_collection_progress = [executor.submit(collect_region_data,session,_,args.account,name=args.name) for _ in regions_list]
         for _ in tqdm(as_completed(data_collection_progress), total=len(data_collection_progress), desc="Collected"):
             pass
+    
 
 if __name__ == "__main__":
     main()
