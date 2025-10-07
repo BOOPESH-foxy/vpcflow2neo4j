@@ -1,7 +1,7 @@
 import os
 import typer
-from aws_vpc import fetch_vpc_ids
-from aws_region import fetch_regions
+from scripts.collector.aws_vpc import fetch_vpc_ids
+from scripts.collector.aws_region import fetch_regions
 
 app = typer.Typer(help="FETCH VPC FLOW LOGS FROM S3,CloudWatch")
 

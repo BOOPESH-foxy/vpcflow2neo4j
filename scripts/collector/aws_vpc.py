@@ -6,7 +6,6 @@ vpc_client = aws_client()
 vpc_id_list = []
 
 def fetch_vpc_ids():
-
     print(f"! Fetching VPC id's")
     try:
 
@@ -18,9 +17,16 @@ def fetch_vpc_ids():
             vpc_id = vpc_data["VpcId"]
             vpc_id_list.append(vpc_id)
     
-        print(vpc_id_list)
         return vpc_id_list
         
     except Exception as e:
         print(":: Error ::",e)
         raise
+
+
+def describe_eni_and_subnet():
+    vpc_id_list = fetch_vpc_ids()
+    response_vpc_description = vpc_client.describe_flow_logs()
+    print(response_vpc_description)
+    
+
