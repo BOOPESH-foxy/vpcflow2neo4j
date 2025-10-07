@@ -7,3 +7,5 @@ scripts/__pycache__
 scripts/collector/__pycache__
 scripts/collector/config.json
 Output/
+neo4j/
+Graphs/

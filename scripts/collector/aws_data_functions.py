@@ -17,8 +17,8 @@ def collect_region_data(session,region,account,name=None):
     ec2 = session.client("ec2",region_name=region)
     outdir = f"Output/{name or account}/{region}"
 
-
     vpcs        = list(pagination_result(ec2, "describe_vpcs", "Vpcs"))
+    route_table = list(pagination_result(ec2, "describe_route_tables", "RouteTables"))
     subnets     = list(pagination_result(ec2, "describe_subnets", "Subnets"))
     enis        = list(pagination_result(ec2, "describe_network_interfaces", "NetworkInterfaces"))
     sgs         = list(pagination_result(ec2, "describe_security_groups", "SecurityGroups"))
@@ -33,10 +33,10 @@ def collect_region_data(session,region,account,name=None):
         tgwAttachments  = list(pagination_result(ec2, "describe_transit_gateway_attachments", "TransitGatewayAttachments"))
 
     except botocore.exceptions.ClientError:
-        tgw, att = [], []
+        tgw, tgwAttachments = [], []
 
     for resource,data in [
-        ("vpcs", vpcs), ("subnets", subnets), ("enis", enis), ("sgs", sgs),
+        ("vpcs", vpcs), ("subnets", subnets), ("enis", enis), ("sgs", sgs),("route_tables",route_table),
         ("igw", igw), ("nat_gateways", natGateway), ("vpc_endpoints", vpcEndpoint),
         ("peering", vpcPeering), ("nacls", NetworkACLs), ("tgw", tgw), ("tgw_attachments", tgwAttachments),
         
