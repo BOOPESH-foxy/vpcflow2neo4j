@@ -1,21 +1,20 @@
 import boto3
 import botocore
-from aws_client import aws_client
+from aws_session import aws_session
 
-client = aws_client()
+client = aws_session()
 list_regions = []
-
 
 def fetch_regions():
     
     try:
-        r = client.describe_regions(
+        response_region = client.describe_regions(
             AllRegions=True, 
             Filters=[{
                 "Name":"opt-in-status",
                 "Values":["opt-in-not-required","opted-in"
                     ]}])
-        return sorted([x["RegionName"] for x in r["Regions"]])
+        return sorted([_["RegionName"] for _ in response_region["Regions"]])
     
     except Exception as e:
         print(":: Error ::",e)

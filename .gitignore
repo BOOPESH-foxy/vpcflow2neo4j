@@ -2,4 +2,8 @@
 .env
 NEO4J_AUTH.txt
 scripts/.env
+scripts/config.json
 scripts/__pycache__
+scripts/collector/__pycache__
+scripts/collector/config.json
+

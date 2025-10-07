@@ -1,0 +1,9 @@
+{
+  "accounts": [
+    { "name": "prod", "id": "123456789012", "default": true },
+    { "name": "dev",  "id": "210987654321" }
+  ],
+  "cidrs": [
+    { "name": "Office", "cidr": "1.2.3.4/32" }
+  ]
+}
